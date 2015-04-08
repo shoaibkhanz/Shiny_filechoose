@@ -1,0 +1,27 @@
+#Seeting the limit of file size that can be uploaded to 3MB
+library(ggplot2)
+options(shiny.maxRequestSize = 3*1024^2)
+
+shinyServer(function(input,output){
+  
+  output$scatterplot<-renderPlot({
+    
+    scatterfile<-input$file0
+    
+    if(is.null(scatterfile))
+      return(NULL)
+    scfile<-read.csv(scatterfile$datapath,header = input$header,sep=input$sep,
+                     quote = input$quote)
+    
+    react<-reactive({
+      scfile<-scfile
+      scfile
+    })
+    # Add linear regression lines
+    p<-ggplot(react(),aes(x=X,y=Y))+geom_point(shape=1)+geom_smooth(method=lm,se=TRUE)
+      
+    p
+
+  })
+  
+})
