@@ -1,7 +1,7 @@
 library(shiny)
 library(shinythemes)
 shinyUI(
-  fluidPage(theme = shinytheme("Readable"),
+  fluidPage(theme = shinytheme("readable"),
   titlePanel("Make your Scatter Plot"),
   sidebarLayout(
     sidebarPanel(
